@@ -41,7 +41,7 @@ public class UsuarioService {
         String cpf = scanner.nextLine();
         cpf = validarDado("cpf", cpf);
 
-        if (usuarioDAO.buscarPorCpf(cpf)) {
+        if (usuarioDAO.usuarioExistePorCpf(cpf)) {
             System.out.println("Usuário já existe!");
             return null;
         }

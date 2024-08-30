@@ -54,7 +54,7 @@ public class UsuarioDAO {
         System.out.println("Usuário " + usuario.getNome() + " (" + usuario.getCpf() + ") persistido!");
     }
 
-    public boolean buscarPorCpf(String cpf) {
+    public boolean usuarioExistePorCpf(String cpf) {
         String sqlSelect = "SELECT * FROM TB_USUARIO WHERE cpf_usuario = ?";
 
         try {
@@ -67,6 +67,26 @@ public class UsuarioDAO {
         }
     }
 
+    public Long retornarIdPorCpf(String cpf) {
+        String sqlSelect = "SELECT * FROM TB_USUARIO WHERE cpf_usuario = ?";
+        Long id = null;
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setString(1, cpf);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                id = rs.getLong("id_usuario");
+            }
+
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id;
+    }
+
     public Usuario buscarPorLogin(String email, String senha) {
         String sqlSelect = "SELECT * FROM TB_USUARIO WHERE email_usuario = ? AND senha_usuario = ?";
         Usuario usuario = new Usuario();
@@ -75,16 +95,23 @@ public class UsuarioDAO {
             statement.setString(1, email);
             statement.setString(2, senha);
             ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                usuario.setNome(rs.getString("nome_usuario"));
-                usuario.setEmail(rs.getString("email_usuario"));
-                usuario.setSenha(rs.getString("senha_usuario"));
-                usuario.setGenero(rs.getString("genero_usuario"));
-                usuario.setTelefone(rs.getString("telefone_usuario"));
-                usuario.setCpf(rs.getString("cpf_usuario"));
+
+            if (!rs.next()) {
+                System.out.println("Login não encontrado!");
+                return null;
             }
+
+            usuario.setNome(rs.getString("nome_usuario"));
+            usuario.setEmail(rs.getString("email_usuario"));
+            usuario.setSenha(rs.getString("senha_usuario"));
+            usuario.setGenero(rs.getString("genero_usuario"));
+            usuario.setTelefone(rs.getString("telefone_usuario"));
+            usuario.setCpf(rs.getString("cpf_usuario"));
+
+            statement.close();
+            rs.close();
         } catch (SQLException e) {
-            return null;
+            throw new RuntimeException(e);
         }
         return usuario;
     }
