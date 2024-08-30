@@ -1,4 +1,5 @@
 import model.Usuario;
+import service.DescricaoProblemaService;
 import service.UsuarioService;
 import service.VeiculoService;
 
@@ -7,6 +8,7 @@ import java.util.Scanner;
 public class Sistema {
     private UsuarioService usuarioService;
     private VeiculoService veiculoService;
+    private DescricaoProblemaService descricaoProblemaService;
     private Scanner scanner;
     private Usuario usuario;
 
@@ -52,7 +54,8 @@ public class Sistema {
         System.out.println("Olá " + usuario.getNome() + ", o que você deseja fazer?");
         System.out.println("""
                 1 - Cadastrar veículo
-                2 - Ver seus veículos""");
+                2 - Ver seus veículos
+                3 - Fazer descrição do problema ocorrido ao veículo""");
         int opcao = scanner.nextInt();scanner.nextLine();
 
         switch (opcao) {
@@ -62,6 +65,10 @@ public class Sistema {
             }
             case 2 -> {
                 veiculoService.mostrarVeiculos(usuario);
+                exibirMenu();
+            }
+            case 3 -> {
+                descricaoProblemaService.persistirDescricao(usuario);
                 exibirMenu();
             }
             default -> {

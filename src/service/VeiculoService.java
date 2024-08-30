@@ -19,7 +19,7 @@ public class VeiculoService {
         this.scanner = new Scanner(System.in);
     }
 
-    public Veiculo persistirVeiculo(Usuario usuario) {
+    public void persistirVeiculo(Usuario usuario) {
 
         System.out.println(usuarioDAO.retornarIdPorCpf(usuario.getCpf()));
 
@@ -45,7 +45,6 @@ public class VeiculoService {
 
         Veiculo veiculo = new Veiculo(placa, marca, modelo, ano, tipo, usuarioDAO.retornarIdPorCpf(usuario.getCpf()));
         veiculoDAO.persistirVeiculo(veiculo);
-        return veiculo;
     }
 
     public String validarString(String caso, String dado) {
@@ -101,5 +100,10 @@ public class VeiculoService {
         List<Veiculo> veiculos = veiculoDAO.pegarVeiculos(idUsuario);
 
         veiculos.forEach(System.out::println);
+    }
+
+    public void mostrarVeiculosComId(Usuario usuario) {
+        Long idUsuario = usuarioDAO.retornarIdPorCpf(usuario.getCpf());
+        List<Veiculo> veiculos = veiculoDAO.pegarVeiculos(idUsuario);
     }
 }

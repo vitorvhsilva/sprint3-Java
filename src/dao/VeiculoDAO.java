@@ -1,6 +1,7 @@
 package dao;
 
 import connection.ConnectionFactory;
+import dto.VeiculoDTO;
 import model.Usuario;
 import model.Veiculo;
 
@@ -66,6 +67,33 @@ public class VeiculoDAO {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Veiculo veiculo = new Veiculo();
+                veiculo.setPlaca(rs.getString("placa_veiculo"));
+                veiculo.setMarca(rs.getString("marca_veiculo"));
+                veiculo.setModelo(rs.getString("modelo_veiculo"));
+                veiculo.setAno(rs.getInt("ano_veiculo"));
+                veiculo.setTipo(rs.getString("tipo_veiculo"));
+                veiculo.setIdUsuario(idUsuario);
+                veiculos.add(veiculo);
+            }
+
+            rs.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return veiculos;
+    }
+
+    public List<VeiculoDTO> pegarVeiculosComId(Long idUsuario) {
+        String sqlSelect = "SELECT * FROM TB_VEICULO WHERE id_usuario = ?";
+        List<VeiculoDTO> veiculos = new ArrayList<>();
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setLong(1, idUsuario);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                VeiculoDTO veiculo = new VeiculoDTO();
+                veiculo.setIdVeiculo(rs.getLong("id_veiculo"));
                 veiculo.setPlaca(rs.getString("placa_veiculo"));
                 veiculo.setMarca(rs.getString("marca_veiculo"));
                 veiculo.setModelo(rs.getString("modelo_veiculo"));
