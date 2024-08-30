@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VeiculoDAO {
     private Connection conexao;
@@ -55,39 +57,30 @@ public class VeiculoDAO {
         System.out.println("Veículo " + veiculo.getModelo() + " " + veiculo.getMarca() + " (" + veiculo.getPlaca() + ") persistido!");
     }
 
-    public boolean buscarPorCpf(String cpf) {
-        String sqlSelect = "SELECT * FROM TB_USUARIO WHERE cpf_usuario = ?";
-
+    public List<Veiculo> pegarVeiculos(Long idUsuario) {
+        String sqlSelect = "SELECT * FROM TB_VEICULO WHERE id_usuario = ?";
+        List<Veiculo> veiculos = new ArrayList<>();
         try {
             PreparedStatement statement = conexao.prepareStatement(sqlSelect);
-            statement.setString(1, cpf);
-            ResultSet rs = statement.executeQuery();
-            return rs.next();
-        } catch (SQLException e) {
-            return false;
-        }
-    }
-
-    public Usuario buscarPorLogin(String email, String senha) {
-        String sqlSelect = "SELECT * FROM TB_USUARIO WHERE email_usuario = ? AND senha_usuario = ?";
-        Usuario usuario = new Usuario();
-        try {
-            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
-            statement.setString(1, email);
-            statement.setString(2, senha);
+            statement.setLong(1, idUsuario);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                usuario.setNome(rs.getString("nome_usuario"));
-                usuario.setEmail(rs.getString("email_usuario"));
-                usuario.setSenha(rs.getString("senha_usuario"));
-                usuario.setGenero(rs.getString("genero_usuario"));
-                usuario.setTelefone(rs.getString("telefone_usuario"));
-                usuario.setCpf(rs.getString("cpf_usuario"));
+                Veiculo veiculo = new Veiculo();
+                veiculo.setPlaca(rs.getString("placa_veiculo"));
+                veiculo.setMarca(rs.getString("marca_veiculo"));
+                veiculo.setModelo(rs.getString("modelo_veiculo"));
+                veiculo.setAno(rs.getInt("ano_veiculo"));
+                veiculo.setTipo(rs.getString("tipo_veiculo"));
+                veiculo.setIdUsuario(idUsuario);
+                veiculos.add(veiculo);
             }
+
+            rs.close();
+            statement.close();
         } catch (SQLException e) {
-            return null;
+            throw new RuntimeException(e);
         }
-        return usuario;
+        return veiculos;
     }
 
     public void fecharConexao() {

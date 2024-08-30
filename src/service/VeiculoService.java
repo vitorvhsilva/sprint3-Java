@@ -5,6 +5,7 @@ import dao.VeiculoDAO;
 import model.Usuario;
 import model.Veiculo;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class VeiculoService {
@@ -93,5 +94,12 @@ public class VeiculoService {
             return validarAno(ano);
         }
         return ano;
+    }
+
+    public void mostrarVeiculos(Usuario usuario) {
+        Long idUsuario = usuarioDAO.retornarIdPorCpf(usuario.getCpf());
+        List<Veiculo> veiculos = veiculoDAO.pegarVeiculos(idUsuario);
+
+        veiculos.forEach(System.out::println);
     }
 }

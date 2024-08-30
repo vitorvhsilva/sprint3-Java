@@ -40,12 +40,7 @@ public class Sistema {
 
 
         if (usuario == null) {
-            System.out.println("Deseja reiniciar ou encerrar o sistema? \n1 - Reiniciar, 2 - Encerrar");
-            opcao = scanner.nextInt();scanner.nextLine();
-
-            if (opcao != 1) {
-                System.exit(0);
-            }
+            encerrarOuReiniciarSistema();
 
             loginOuCadastro();
         }
@@ -60,8 +55,29 @@ public class Sistema {
                 2 - Ver seus veículos""");
         int opcao = scanner.nextInt();scanner.nextLine();
 
-        if (opcao == 1) {
-            System.out.println(veiculoService.persistirVeiculo(usuario));
+        switch (opcao) {
+            case 1 -> {
+                veiculoService.persistirVeiculo(usuario);
+                exibirMenu();
+            }
+            case 2 -> {
+                veiculoService.mostrarVeiculos(usuario);
+                exibirMenu();
+            }
+            default -> {
+                System.out.println("Opção inválida!");
+                encerrarOuReiniciarSistema();
+                exibirMenu();
+            }
+        }
+    }
+
+    public void encerrarOuReiniciarSistema() {
+        System.out.println("Deseja reiniciar ou encerrar o sistema? \n1 - Reiniciar, 2 - Encerrar");
+        int opcao = scanner.nextInt();scanner.nextLine();
+
+        if (opcao != 1) {
+            System.exit(0);
         }
     }
 }
