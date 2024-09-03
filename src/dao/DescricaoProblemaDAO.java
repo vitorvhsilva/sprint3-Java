@@ -53,10 +53,33 @@ public class DescricaoProblemaDAO {
         System.out.println("Descrição do problema feita");
     }
 
+    public List<DescricaoProblema> pegarDescricoes(Long idVeiculo) {
+        String sqlSelect = "SELECT * FROM TB_DESCRICAO_PROBLEMA WHERE id_veiculo = ?";
+        List<DescricaoProblema> descricoes = new ArrayList<>();
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setLong(1, idVeiculo);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                DescricaoProblema descricaoProblema = new DescricaoProblema();
+                descricaoProblema.setDescricaoProblema(rs.getString("descricao_problema"));
+                descricaoProblema.setDataProblema(rs.getTimestamp("data_problema").toLocalDateTime());
+                descricaoProblema.setIdVeiculo(idVeiculo);
+                descricoes.add(descricaoProblema);
+            }
+
+            rs.close();
+            statement.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return descricoes;
+    }
+
     public void fecharConexao() {
         try {
             conexao.close();
-            System.out.println("UsuárioDAO fechado!");
+            System.out.println("DescricaoProblemaDAO fechado!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

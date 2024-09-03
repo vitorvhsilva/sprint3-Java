@@ -41,5 +41,8 @@ public class DescricaoProblema {
         this.idVeiculo = idVeiculo;
     }
 
-
+    @Override
+    public String toString() {
+        return "Descricao do Problema ocorrido em " + dataProblema + ": " + descricaoProblema;
+    }
 }

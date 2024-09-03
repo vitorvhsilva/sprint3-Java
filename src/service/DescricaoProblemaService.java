@@ -6,7 +6,6 @@ import dao.VeiculoDAO;
 import dto.VeiculoDTO;
 import model.DescricaoProblema;
 import model.Usuario;
-import model.Veiculo;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,7 +25,7 @@ public class DescricaoProblemaService {
     }
 
     public DescricaoProblema persistirDescricao(Usuario usuario) {
-        Long idVeiculo = mostrarVeiculosComId(usuario);
+        Long idVeiculo = pegarIdDoVeiculoEscolhido(usuario);
 
         System.out.println("O que aconteceu com o seu veículo?");
         String descricao = scanner.nextLine();
@@ -38,7 +37,7 @@ public class DescricaoProblemaService {
         return descricaoProblema;
     }
 
-    public Long mostrarVeiculosComId(Usuario usuario) {
+    public Long pegarIdDoVeiculoEscolhido(Usuario usuario) {
         List<VeiculoDTO> veiculos = veiculoDAO.pegarVeiculosComId(usuarioDAO.retornarIdPorCpf(usuario.getCpf()));
         veiculos.forEach(System.out::println);
         System.out.println("Escolha um veículo");
@@ -56,6 +55,19 @@ public class DescricaoProblemaService {
             System.exit(0);
         }
 
-        return mostrarVeiculosComId(usuario);
+        return pegarIdDoVeiculoEscolhido(usuario);
+    }
+
+    public void mostrarDescricoesJaFeita(Usuario usuario) {
+        Long idVeiculo = pegarIdDoVeiculoEscolhido(usuario);
+
+        List<DescricaoProblema> descricoes = descricaoProblemaDAO.pegarDescricoes(idVeiculo);
+
+        if (descricoes.isEmpty()) {
+            System.out.println("Nenhuma descrição foi feita para esse veículo!");
+            return;
+        }
+
+        descricoes.forEach(System.out::println);
     }
 }

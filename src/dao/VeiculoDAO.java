@@ -2,7 +2,6 @@ package dao;
 
 import connection.ConnectionFactory;
 import dto.VeiculoDTO;
-import model.Usuario;
 import model.Veiculo;
 
 import java.sql.Connection;
@@ -84,6 +83,7 @@ public class VeiculoDAO {
         return veiculos;
     }
 
+    // retorna uma lista de veiculos mostrando o id pro usuario escolher
     public List<VeiculoDTO> pegarVeiculosComId(Long idUsuario) {
         String sqlSelect = "SELECT * FROM TB_VEICULO WHERE id_usuario = ?";
         List<VeiculoDTO> veiculos = new ArrayList<>();
@@ -114,7 +114,7 @@ public class VeiculoDAO {
     public void fecharConexao() {
         try {
             conexao.close();
-            System.out.println("UsuárioDAO fechado!");
+            System.out.println("VeiculoDAO fechado!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
