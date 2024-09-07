@@ -1,43 +1,45 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Agendamento {
-    private long id_veiculo;
-    private long id_mecanica;
-    private Date dia_data_agendamento;
+    private long idVeiculo;
+    private long idMecanica;
+    private LocalDateTime diaDataAgendamento;
 
     public Agendamento(){
 
     }
 
-    public Agendamento(long id_veiculo, long id_mecanica, Date dia_data_agendamento) {
-        this.id_veiculo = id_veiculo;
-        this.id_mecanica = id_mecanica;
-        this.dia_data_agendamento = dia_data_agendamento;
+    public Agendamento(long id_veiculo, long id_mecanica, LocalDateTime diaDataAgendamento) {
+        this.idVeiculo = id_veiculo;
+        this.idMecanica = id_mecanica;
+        this.diaDataAgendamento = diaDataAgendamento;
     }
 
-    public long getId_veiculo() {
-        return id_veiculo;
+    public long getIdVeiculo() {
+        return idVeiculo;
     }
 
-    public void setId_veiculo(long id_veiculo) {
-        this.id_veiculo = id_veiculo;
+    public void setIdVeiculo(long idVeiculo) {
+        this.idVeiculo = idVeiculo;
     }
 
-    public long getId_mecanica() {
-        return id_mecanica;
+    public long getIdMecanica() {
+        return idMecanica;
     }
 
-    public void setId_mecanica(long id_mecanica) {
-        this.id_mecanica = id_mecanica;
+    public void setIdMecanica(long idMecanica) {
+        this.idMecanica = idMecanica;
     }
 
-    public Date getDia_data_agendamento() {
-        return dia_data_agendamento;
+    public LocalDateTime getDiaDataAgendamento() {
+        return diaDataAgendamento;
     }
 
-    public void setDia_data_agendamento(Date dia_data_agendamento) {
-        this.dia_data_agendamento = dia_data_agendamento;
+    public void setDiaDataAgendamento(LocalDateTime diaDataAgendamento) {
+        this.diaDataAgendamento = diaDataAgendamento;
     }
 }
