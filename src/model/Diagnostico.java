@@ -1,53 +1,54 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Diagnostico {
-    private String palavras_chave_diagnostico;
-    private Date data_diagnostico;
-    private long id_veiculo;
-    private long id_descricao_problema;
+    private String palavrasChaveDiagnostico;
+    private LocalDateTime dataDiagnostico;
+    private long idVeiculo;
+    private long idDescricaoProblema;
 
     public Diagnostico() {
 
     }
 
-    public Diagnostico(String palavras_chave_diagnostico, Date data_diagnostico, long id_veiculo, long id_descricao_problema) {
-        this.palavras_chave_diagnostico = palavras_chave_diagnostico;
-        this.data_diagnostico = data_diagnostico;
-        this.id_veiculo = id_veiculo;
-        this.id_descricao_problema = id_descricao_problema;
+    public Diagnostico(String palavras_chave_diagnostico, LocalDateTime data_diagnostico, long id_veiculo, long id_descricao_problema) {
+        this.palavrasChaveDiagnostico = palavras_chave_diagnostico;
+        this.dataDiagnostico = data_diagnostico;
+        this.idVeiculo = id_veiculo;
+        this.idDescricaoProblema = id_descricao_problema;
     }
 
-    public String getPalavras_chave_diagnostico() {
-        return palavras_chave_diagnostico;
+    public String getPalavrasChaveDiagnostico() {
+        return palavrasChaveDiagnostico;
     }
 
-    public void setPalavras_chave_diagnostico(String palavras_chave_diagnostico) {
-        this.palavras_chave_diagnostico = palavras_chave_diagnostico;
+    public void setPalavrasChaveDiagnostico(String palavrasChaveDiagnostico) {
+        this.palavrasChaveDiagnostico = palavrasChaveDiagnostico;
     }
 
-    public Date getData_diagnostico() {
-        return data_diagnostico;
+    public LocalDateTime getDataDiagnostico() {
+        return dataDiagnostico;
     }
 
-    public void setData_diagnostico(Date data_diagnostico) {
-        this.data_diagnostico = data_diagnostico;
+    public void setDataDiagnostico(LocalDateTime dataDiagnostico) {
+        this.dataDiagnostico = dataDiagnostico;
     }
 
-    public long getId_veiculo() {
-        return id_veiculo;
+    public long getIdVeiculo() {
+        return idVeiculo;
     }
 
-    public void setId_veiculo(long id_veiculo) {
-        this.id_veiculo = id_veiculo;
+    public void setIdVeiculo(long idVeiculo) {
+        this.idVeiculo = idVeiculo;
     }
 
-    public long getId_descricao_problema() {
-        return id_descricao_problema;
+    public long getIdDescricaoProblema() {
+        return idDescricaoProblema;
     }
 
-    public void setId_descricao_problema(long id_descricao_problema) {
-        this.id_descricao_problema = id_descricao_problema;
+    public void setIdDescricaoProblema(long idDescricaoProblema) {
+        this.idDescricaoProblema = idDescricaoProblema;
     }
 }
