@@ -1,63 +1,65 @@
 package model;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Orcamento {
-    private long id_veiculo;
-    private long id_diagnostico;
-    private double valor_orcamento;
-    private String pecas_danificadas_orcamento;
-    private Date data_orcamento;
+    private long idVeiculo;
+    private long idDiagnostico;
+    private double valorOrcamento;
+    private String pecasDanificadasOrcamento;
+    private LocalDateTime dataOrcamento;
 
     public Orcamento(){
 
     }
 
-    public Orcamento(long id_veiculo, long id_diagnostico, double valor_orcamento, String pecas_danificadas_orcamento, Date data_orcamento) {
-        this.id_veiculo = id_veiculo;
-        this.id_diagnostico = id_diagnostico;
-        this.valor_orcamento = valor_orcamento;
-        this.pecas_danificadas_orcamento = pecas_danificadas_orcamento;
-        this.data_orcamento = data_orcamento;
+    public Orcamento(long idVeiculo, long idDiagnostico, double valorOrcamento, String pecasDanificadasOrcamento, LocalDateTime dataOrcamento) {
+        this.idVeiculo = idVeiculo;
+        this.idDiagnostico = idDiagnostico;
+        this.valorOrcamento = valorOrcamento;
+        this.pecasDanificadasOrcamento = pecasDanificadasOrcamento;
+        this.dataOrcamento = dataOrcamento;
     }
 
-    public long getId_veiculo() {
-        return id_veiculo;
+    public long getIdVeiculo() {
+        return idVeiculo;
     }
 
-    public void setId_veiculo(long id_veiculo) {
-        this.id_veiculo = id_veiculo;
+    public void setIdVeiculo(long idVeiculo) {
+        this.idVeiculo = idVeiculo;
     }
 
-    public long getId_diagnostico() {
-        return id_diagnostico;
+    public long getIdDiagnostico() {
+        return idDiagnostico;
     }
 
-    public void setId_diagnostico(long id_diagnostico) {
-        this.id_diagnostico = id_diagnostico;
+    public void setIdDiagnostico(long idDiagnostico) {
+        this.idDiagnostico = idDiagnostico;
     }
 
-    public double getValor_orcamento() {
-        return valor_orcamento;
+    public double getValorOrcamento() {
+        return valorOrcamento;
     }
 
-    public void setValor_orcamento(double valor_orcamento) {
-        this.valor_orcamento = valor_orcamento;
+    public void setValorOrcamento(double valorOrcamento) {
+        this.valorOrcamento = valorOrcamento;
     }
 
-    public String getPecas_danificadas_orcamento() {
-        return pecas_danificadas_orcamento;
+    public String getPecasDanificadasOrcamento() {
+        return pecasDanificadasOrcamento;
     }
 
-    public void setPecas_danificadas_orcamento(String pecas_danificadas_orcamento) {
-        this.pecas_danificadas_orcamento = pecas_danificadas_orcamento;
+    public void setPecasDanificadasOrcamento(String pecasDanificadasOrcamento) {
+        this.pecasDanificadasOrcamento = pecasDanificadasOrcamento;
     }
 
-    public Date getData_orcamento() {
-        return data_orcamento;
+    public LocalDateTime getDataOrcamento() {
+        return dataOrcamento;
     }
 
-    public void setData_orcamento(Date data_orcamento) {
-        this.data_orcamento = data_orcamento;
+    public void setDataOrcamento(LocalDateTime dataOrcamento) {
+        this.dataOrcamento = dataOrcamento;
     }
 }
