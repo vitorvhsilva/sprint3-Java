@@ -1,7 +1,7 @@
 package model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DescricaoProblema {
     private String descricaoProblema;
@@ -43,6 +43,6 @@ public class DescricaoProblema {
 
     @Override
     public String toString() {
-        return "Descricao do Problema ocorrido em " + dataProblema + ": " + descricaoProblema;
+        return "Descricao do Problema ocorrido em " + DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss").format(dataProblema) + ": " + descricaoProblema;
     }
 }

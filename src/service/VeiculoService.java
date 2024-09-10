@@ -100,10 +100,6 @@ public class VeiculoService {
         List<Veiculo> veiculos = veiculoDAO.pegarVeiculos(idUsuario);
 
         veiculos.forEach(System.out::println);
-    }
-
-    public void mostrarVeiculosComId(Usuario usuario) {
-        Long idUsuario = usuarioDAO.retornarIdPorCpf(usuario.getCpf());
-        List<Veiculo> veiculos = veiculoDAO.pegarVeiculos(idUsuario);
+        System.out.println();
     }
 }

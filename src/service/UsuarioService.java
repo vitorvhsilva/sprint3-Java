@@ -33,11 +33,11 @@ public class UsuarioService {
         String genero = scanner.nextLine().toUpperCase();
         genero = validarDado("genero", genero);
 
-        System.out.println("Qual seu telefone?");
+        System.out.println("Qual seu telefone? (Exemplo: 11999999999)");
         String telefone = scanner.nextLine();
         telefone = validarDado("telefone", telefone);
 
-        System.out.println("Qual seu cpf?");
+        System.out.println("Qual seu CPF? (Exemplo: 12345678999)");
         String cpf = scanner.nextLine();
         cpf = validarDado("cpf", cpf);
 
@@ -98,7 +98,7 @@ public class UsuarioService {
             }
             case "telefone" -> {
                 if (dado.length() != 11) {
-                    System.out.println("Telefone inválido! Digite novamente");
+                    System.out.println("Telefone inválido! Digite novamente. (Exemplo: 11999999999)");
                     dado = scanner.nextLine();
                     return validarDado("telefone", dado);
                 }
@@ -106,7 +106,7 @@ public class UsuarioService {
             }
             case "cpf" -> {
                 if (dado.length() != 11) {
-                    System.out.println("CPF inválido! Digite novamente");
+                    System.out.println("CPF inválido! Digite novamente. (Exemplo: 12345678999)");
                     dado = scanner.nextLine();
                     return validarDado("cpf", dado);
                 }

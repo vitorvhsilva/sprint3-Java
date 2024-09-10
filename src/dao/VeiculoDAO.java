@@ -1,7 +1,6 @@
 package dao;
 
 import connection.ConnectionFactory;
-import dto.VeiculoDTO;
 import model.Veiculo;
 
 import java.sql.Connection;
@@ -83,32 +82,22 @@ public class VeiculoDAO {
         return veiculos;
     }
 
-    // retorna uma lista de veiculos mostrando o id pro usuario escolher
-    public List<VeiculoDTO> pegarVeiculosComId(Long idUsuario) {
-        String sqlSelect = "SELECT * FROM TB_VEICULO WHERE id_usuario = ?";
-        List<VeiculoDTO> veiculos = new ArrayList<>();
+    public Long pegarIdPelaPlaca(String placa) {
+        String sqlSelect = "SELECT * FROM TB_VEICULO WHERE placa_veiculo = ?";
+        Long idVeiculo = null;
         try {
             PreparedStatement statement = conexao.prepareStatement(sqlSelect);
-            statement.setLong(1, idUsuario);
+            statement.setString(1, placa);
             ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                VeiculoDTO veiculo = new VeiculoDTO();
-                veiculo.setIdVeiculo(rs.getLong("id_veiculo"));
-                veiculo.setPlaca(rs.getString("placa_veiculo"));
-                veiculo.setMarca(rs.getString("marca_veiculo"));
-                veiculo.setModelo(rs.getString("modelo_veiculo"));
-                veiculo.setAno(rs.getInt("ano_veiculo"));
-                veiculo.setTipo(rs.getString("tipo_veiculo"));
-                veiculo.setIdUsuario(idUsuario);
-                veiculos.add(veiculo);
+            while(rs.next()) {
+                idVeiculo = rs.getLong("id_veiculo");
             }
-
-            rs.close();
             statement.close();
+            rs.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return veiculos;
+        return idVeiculo;
     }
 
     public void fecharConexao() {

@@ -3,9 +3,9 @@ package service;
 import dao.DescricaoProblemaDAO;
 import dao.UsuarioDAO;
 import dao.VeiculoDAO;
-import dto.VeiculoDTO;
 import model.DescricaoProblema;
 import model.Usuario;
+import model.Veiculo;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +25,8 @@ public class DescricaoProblemaService {
     }
 
     public DescricaoProblema persistirDescricao(Usuario usuario) {
-        Long idVeiculo = pegarIdDoVeiculoEscolhido(usuario);
+        String placa = pegarPlacaDoVeiculoEscolhido(usuario);
+        Long idVeiculo = veiculoDAO.pegarIdPelaPlaca(placa);
 
         System.out.println("O que aconteceu com o seu veículo?");
         String descricao = scanner.nextLine();
@@ -37,15 +38,15 @@ public class DescricaoProblemaService {
         return descricaoProblema;
     }
 
-    public Long pegarIdDoVeiculoEscolhido(Usuario usuario) {
-        List<VeiculoDTO> veiculos = veiculoDAO.pegarVeiculosComId(usuarioDAO.retornarIdPorCpf(usuario.getCpf()));
+    public String pegarPlacaDoVeiculoEscolhido(Usuario usuario) {
+        List<Veiculo> veiculos = veiculoDAO.pegarVeiculos(usuarioDAO.retornarIdPorCpf(usuario.getCpf()));
         veiculos.forEach(System.out::println);
-        System.out.println("Escolha um veículo");
-        Long idVeiculo = scanner.nextLong();scanner.nextLine();
+        System.out.println("Escolha um veículo pela placa");
+        String placa = scanner.nextLine();
 
-        for (VeiculoDTO veiculo : veiculos) {
-            if (idVeiculo.equals(veiculo.getIdVeiculo())) {
-                return idVeiculo;
+        for (Veiculo veiculo : veiculos) {
+            if (placa.equals(veiculo.getPlaca())) {
+                return placa;
             }
         }
 
@@ -55,11 +56,12 @@ public class DescricaoProblemaService {
             System.exit(0);
         }
 
-        return pegarIdDoVeiculoEscolhido(usuario);
+        return pegarPlacaDoVeiculoEscolhido(usuario);
     }
 
     public void mostrarDescricoesJaFeita(Usuario usuario) {
-        Long idVeiculo = pegarIdDoVeiculoEscolhido(usuario);
+        String placa = pegarPlacaDoVeiculoEscolhido(usuario);
+        Long idVeiculo = veiculoDAO.pegarIdPelaPlaca(placa);
 
         List<DescricaoProblema> descricoes = descricaoProblemaDAO.pegarDescricoes(idVeiculo);
 

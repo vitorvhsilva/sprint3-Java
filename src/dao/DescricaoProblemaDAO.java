@@ -1,9 +1,7 @@
 package dao;
 
 import connection.ConnectionFactory;
-import dto.VeiculoDTO;
 import model.DescricaoProblema;
-import model.Veiculo;
 
 import java.sql.*;
 import java.util.ArrayList;
