@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Diagnostico {
     private String diagnosticoVeiculo;
@@ -53,11 +54,6 @@ public class Diagnostico {
 
     @Override
     public String toString() {
-        return "Diagnostico{" +
-                "diagnosticoVeiculo='" + diagnosticoVeiculo + '\'' +
-                ", dataDiagnostico=" + dataDiagnostico +
-                ", idVeiculo=" + idVeiculo +
-                ", idDescricaoProblema=" + idDescricaoProblema +
-                '}';
+        return "Diagnostico: " + diagnosticoVeiculo + ", data: " + DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss").format(dataDiagnostico);
     }
 }

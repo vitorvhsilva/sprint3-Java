@@ -1,9 +1,6 @@
 import model.DescricaoProblema;
 import model.Usuario;
-import service.DescricaoProblemaService;
-import service.DiagnosticoService;
-import service.UsuarioService;
-import service.VeiculoService;
+import service.*;
 
 import java.util.Scanner;
 
@@ -12,6 +9,7 @@ public class Sistema {
     private VeiculoService veiculoService;
     private DescricaoProblemaService descricaoProblemaService;
     private DiagnosticoService diagnosticoService;
+    private OrcamentoService orcamentoService;
     private Scanner scanner;
     private Usuario usuario;
 
@@ -20,6 +18,7 @@ public class Sistema {
         this.veiculoService = new VeiculoService();
         this.descricaoProblemaService = new DescricaoProblemaService();
         this.diagnosticoService = new DiagnosticoService();
+        this.orcamentoService = new OrcamentoService();
         this.scanner = new Scanner(System.in);
     }
 
@@ -62,7 +61,8 @@ public class Sistema {
                 2 - Ver seus veículos
                 3 - Fazer descrição do problema ocorrido ao veículo
                 4 - Mostrar descrição já feitas a um veículo
-                5 - Mostrar diagnósticos já feitos a um veículo""");
+                5 - Mostrar diagnósticos já feitos a um veículo
+                6 - Fazer orçamento do veículo""");
         int opcao = scanner.nextInt();scanner.nextLine();
 
         switch (opcao) {
@@ -85,6 +85,10 @@ public class Sistema {
             }
             case 5 -> {
                 diagnosticoService.mostrarDescricoesJaFeita(usuario);
+                exibirMenu();
+            }
+            case 6 -> {
+                orcamentoService.fazerOrcamento(usuario);
                 exibirMenu();
             }
             default -> {

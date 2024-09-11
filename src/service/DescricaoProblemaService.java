@@ -25,7 +25,7 @@ public class DescricaoProblemaService {
     }
 
     public DescricaoProblema persistirDescricao(Usuario usuario) {
-        String placa = pegarPlacaDoVeiculoEscolhido(usuario);
+        String placa = new VeiculoService().pegarPlacaDoVeiculoEscolhido(usuario);
         Long idVeiculo = veiculoDAO.pegarIdPelaPlaca(placa);
 
         System.out.println("O que aconteceu com o seu veículo?");
@@ -38,29 +38,8 @@ public class DescricaoProblemaService {
         return descricaoProblema;
     }
 
-    public String pegarPlacaDoVeiculoEscolhido(Usuario usuario) {
-        List<Veiculo> veiculos = veiculoDAO.pegarVeiculos(usuarioDAO.retornarIdPorCpf(usuario.getCpf()));
-        veiculos.forEach(System.out::println);
-        System.out.println("Escolha um veículo pela placa");
-        String placa = scanner.nextLine();
-
-        for (Veiculo veiculo : veiculos) {
-            if (placa.equals(veiculo.getPlaca())) {
-                return placa;
-            }
-        }
-
-        System.out.println("Opção inválida! Deseja tentar novamente ou encerrar o programa? \n1 - Tentar novamente, 2 - Encerrar");
-        int opcao = scanner.nextInt();scanner.nextLine();
-        if (opcao != 1) {
-            System.exit(0);
-        }
-
-        return pegarPlacaDoVeiculoEscolhido(usuario);
-    }
-
     public void mostrarDescricoesJaFeita(Usuario usuario) {
-        String placa = pegarPlacaDoVeiculoEscolhido(usuario);
+        String placa = new VeiculoService().pegarPlacaDoVeiculoEscolhido(usuario);
         Long idVeiculo = veiculoDAO.pegarIdPelaPlaca(placa);
 
         List<DescricaoProblema> descricoes = descricaoProblemaDAO.pegarDescricoes(idVeiculo);

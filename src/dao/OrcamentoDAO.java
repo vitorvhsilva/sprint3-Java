@@ -1,5 +1,6 @@
 package dao;
 
+import connection.ConnectionFactory;
 import model.Orcamento;
 
 import java.sql.*;
@@ -8,6 +9,10 @@ import java.util.List;
 
 public class OrcamentoDAO {
     private Connection conexao;
+
+    public OrcamentoDAO() {
+        this.conexao = new ConnectionFactory().obterConexao();
+    }
 
     private Long obterProximoId(){
         Long id = null;
@@ -25,7 +30,7 @@ public class OrcamentoDAO {
         return id;
     }
 
-    public void fazerOrcamento(Orcamento orcamento){
+    public void persistirOrcamento(Orcamento orcamento){
         String sqlInsertTbOrcamento = """
                 INSERT INTO TB_ORCAMENTO(id_orcamento, id_veiculo, id_diagnostico, valor_orcamento, pecas_danificadas_orcamento, data_orcamento)
                 VALUES(?, ?, ?, ?, ?, ?)

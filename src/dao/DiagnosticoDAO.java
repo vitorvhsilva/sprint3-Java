@@ -1,6 +1,7 @@
 package dao;
 
 import connection.ConnectionFactory;
+import model.DescricaoProblema;
 import model.Diagnostico;
 
 import java.sql.*;
@@ -72,6 +73,24 @@ public class DiagnosticoDAO {
             throw new RuntimeException(e);
         }
         return diagnosticos;
+    }
+
+    public Long buscarIdPorDataEIds(Diagnostico diagnostico) {
+        String sqlSelect = "SELECT * FROM TB_DIAGNOSTICO WHERE data_diagnostico= ? AND id_veiculo = ? AND id_descricao_problema = ?";
+        Long idDiagnostico = null;
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setTimestamp(1, Timestamp.valueOf(diagnostico.getDataDiagnostico()));
+            statement.setLong(2, diagnostico.getIdVeiculo());
+            statement.setLong(3, diagnostico.getIdDescricaoProblema());
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                idDiagnostico = rs.getLong("id_diagnostico");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return idDiagnostico;
     }
 
     public void fecharConexao(){

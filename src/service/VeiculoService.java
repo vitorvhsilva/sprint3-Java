@@ -102,4 +102,25 @@ public class VeiculoService {
         veiculos.forEach(System.out::println);
         System.out.println();
     }
+
+    public String pegarPlacaDoVeiculoEscolhido(Usuario usuario) {
+        List<Veiculo> veiculos = veiculoDAO.pegarVeiculos(usuarioDAO.retornarIdPorCpf(usuario.getCpf()));
+        veiculos.forEach(System.out::println);
+        System.out.println("Escolha um veículo pela placa");
+        String placa = scanner.nextLine();
+
+        for (Veiculo veiculo : veiculos) {
+            if (placa.equals(veiculo.getPlaca())) {
+                return placa;
+            }
+        }
+
+        System.out.println("Opção inválida! Deseja tentar novamente ou encerrar o programa? \n1 - Tentar novamente, 2 - Encerrar");
+        int opcao = scanner.nextInt();scanner.nextLine();
+        if (opcao != 1) {
+            System.exit(0);
+        }
+
+        return pegarPlacaDoVeiculoEscolhido(usuario);
+    }
 }
