@@ -23,8 +23,7 @@ public class Sistema {
     }
 
     public void iniciarSistema() {
-        this.usuario = loginOuCadastro();
-        System.out.println(usuario);
+        System.out.println(loginOuCadastro());
 
         exibirMenu();
     }
@@ -32,8 +31,6 @@ public class Sistema {
     public Usuario loginOuCadastro() {
         System.out.println("Olá, seja bem vindo! \nVocê deseja fazer login ou cadastro? \n1 - Login, 2 - Cadastro");
         int opcao = scanner.nextInt();scanner.nextLine();
-
-        Usuario usuario;
 
         if (opcao == 1) {
             usuario = usuarioService.fazerLogin();
@@ -62,7 +59,8 @@ public class Sistema {
                 3 - Fazer descrição do problema ocorrido ao veículo
                 4 - Mostrar descrição já feitas a um veículo
                 5 - Mostrar diagnósticos já feitos a um veículo
-                6 - Fazer orçamento do veículo""");
+                6 - Fazer orçamento do veículo
+                7 - Mostrar orçamentos já feito a um veículo""");
         int opcao = scanner.nextInt();scanner.nextLine();
 
         switch (opcao) {
@@ -89,6 +87,10 @@ public class Sistema {
             }
             case 6 -> {
                 orcamentoService.fazerOrcamento(usuario);
+                exibirMenu();
+            }
+            case 7 -> {
+                orcamentoService.mostrarOrcamentos(usuario);
                 exibirMenu();
             }
             default -> {

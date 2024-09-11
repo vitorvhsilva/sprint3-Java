@@ -57,4 +57,13 @@ public class OrcamentoService {
         orcamentoDAO.persistirOrcamento(orcamento);
         System.out.println(orcamento);
     }
+
+    public void mostrarOrcamentos(Usuario usuario) {
+        String placa = new VeiculoService().pegarPlacaDoVeiculoEscolhido(usuario);
+        Long idVeiculo = veiculoDAO.pegarIdPelaPlaca(placa);
+
+        List<Orcamento> orcamentos = orcamentoDAO.pegarOrcamentos(idVeiculo);
+        orcamentos.forEach(System.out::println);
+        System.out.println();
+    }
 }

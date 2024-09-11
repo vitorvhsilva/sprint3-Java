@@ -52,24 +52,23 @@ public class OrcamentoDAO {
         }
     }
 
-    public List<Orcamento> pegarOrcamentos(long idVeiculo, long idDiagnostico){
-        String sqlSelect = "SELECT * FROM TB_ORCAMENTO WHERE id_veiculo = ? AND id_diagnostico = ?";
+    public List<Orcamento> pegarOrcamentos(long idVeiculo){
+        String sqlSelect = "SELECT * FROM TB_ORCAMENTO WHERE id_veiculo = ?";
         List<Orcamento> orcamentos = new ArrayList<>();
 
         try {
             PreparedStatement statement = conexao.prepareStatement(sqlSelect);
             statement.setLong(1, idVeiculo);
-            statement.setLong(2, idDiagnostico);
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
                 Orcamento orcamento = new Orcamento();
                 orcamento.setIdVeiculo(idVeiculo);
-                orcamento.setIdDiagnostico(idDiagnostico);
+                orcamento.setIdDiagnostico(rs.getLong("id_diagnostico"));
                 orcamento.setValorOrcamento(rs.getDouble("valor_orcamento"));
                 orcamento.setPecasDanificadasOrcamento(rs.getString("pecas_danificadas_orcamento"));
                 orcamento.setDataOrcamento(rs.getTimestamp("data_orcamento").toLocalDateTime());
+                orcamentos.add(orcamento);
             }
-
             rs.close();
             statement.close();
         } catch (SQLException e) {

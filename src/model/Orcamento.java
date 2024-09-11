@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Orcamento {
@@ -61,5 +62,11 @@ public class Orcamento {
 
     public void setDataOrcamento(LocalDateTime dataOrcamento) {
         this.dataOrcamento = dataOrcamento;
+    }
+
+    @Override
+    public String toString() {
+        return "Orçamento feito em: " + DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss").format(dataOrcamento) + ", peças danificadas encontradas: " +
+                pecasDanificadasOrcamento + ", valor: " + valorOrcamento;
     }
 }
