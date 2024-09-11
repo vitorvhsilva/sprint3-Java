@@ -50,23 +50,20 @@ public class DiagnosticoDAO {
         }
     }
 
-    public List<Diagnostico> pegarDiagnosticos(long idVeiculo, long idDescricaoProblema){
-        String sqlSelect = "SELECT * FROM TB_DIAGNOSTICO WHERE id_veiculo = ? AND id_descricao_problema = ?";
+    public List<Diagnostico> pegarDiagnosticos(long idVeiculo){
+        String sqlSelect = "SELECT * FROM TB_DIAGNOSTICO WHERE id_veiculo = ?";
         List<Diagnostico> diagnosticos = new ArrayList<>();
         try{
             PreparedStatement selectDiagnostico = conexao.prepareStatement(sqlSelect);
             selectDiagnostico.setLong(1, idVeiculo);
-            selectDiagnostico.setLong(2, idDescricaoProblema);
             ResultSet rs = selectDiagnostico.executeQuery();
             while(rs.next()){
                 Diagnostico diagnostico = new Diagnostico();
                 diagnostico.setDataDiagnostico(rs.getTimestamp("data_diagnostico").toLocalDateTime());
-                diagnostico.setDiagnosticoVeiculo(rs.getString("palavras_chaves_diagnostico"));
+                diagnostico.setDiagnosticoVeiculo(rs.getString("diagnostico_veiculo"));
                 diagnostico.setIdVeiculo(idVeiculo);
-                diagnostico.setIdDescricaoProblema(idDescricaoProblema);
+                diagnostico.setIdDescricaoProblema(rs.getLong("id_descricao_problema"));
                 diagnosticos.add(diagnostico);
-
-
             }
 
             rs.close();

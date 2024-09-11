@@ -61,7 +61,8 @@ public class Sistema {
                 1 - Cadastrar veículo
                 2 - Ver seus veículos
                 3 - Fazer descrição do problema ocorrido ao veículo
-                4 - Mostrar descrição já feitas a um veículo""");
+                4 - Mostrar descrição já feitas a um veículo
+                5 - Mostrar diagnósticos já feitos a um veículo""");
         int opcao = scanner.nextInt();scanner.nextLine();
 
         switch (opcao) {
@@ -80,6 +81,10 @@ public class Sistema {
             }
             case 4 -> {
                 descricaoProblemaService.mostrarDescricoesJaFeita(usuario);
+                exibirMenu();
+            }
+            case 5 -> {
+                diagnosticoService.mostrarDescricoesJaFeita(usuario);
                 exibirMenu();
             }
             default -> {
