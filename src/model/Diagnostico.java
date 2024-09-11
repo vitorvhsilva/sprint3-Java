@@ -1,10 +1,9 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Diagnostico {
-    private String palavrasChaveDiagnostico;
+    private String diagnosticoVeiculo;
     private LocalDateTime dataDiagnostico;
     private long idVeiculo;
     private long idDescricaoProblema;
@@ -13,19 +12,19 @@ public class Diagnostico {
 
     }
 
-    public Diagnostico(String palavras_chave_diagnostico, LocalDateTime data_diagnostico, long id_veiculo, long id_descricao_problema) {
-        this.palavrasChaveDiagnostico = palavras_chave_diagnostico;
-        this.dataDiagnostico = data_diagnostico;
-        this.idVeiculo = id_veiculo;
-        this.idDescricaoProblema = id_descricao_problema;
+    public Diagnostico(String diagnosticoVeiculo, LocalDateTime dataDiagnostico, long idVeiculo, long idDescricaoProblema) {
+        this.diagnosticoVeiculo = diagnosticoVeiculo;
+        this.dataDiagnostico = dataDiagnostico;
+        this.idVeiculo = idVeiculo;
+        this.idDescricaoProblema = idDescricaoProblema;
     }
 
-    public String getPalavrasChaveDiagnostico() {
-        return palavrasChaveDiagnostico;
+    public String getDiagnosticoVeiculo() {
+        return diagnosticoVeiculo;
     }
 
-    public void setPalavrasChaveDiagnostico(String palavrasChaveDiagnostico) {
-        this.palavrasChaveDiagnostico = palavrasChaveDiagnostico;
+    public void setDiagnosticoVeiculo(String diagnosticoVeiculo) {
+        this.diagnosticoVeiculo = diagnosticoVeiculo;
     }
 
     public LocalDateTime getDataDiagnostico() {
@@ -50,5 +49,15 @@ public class Diagnostico {
 
     public void setIdDescricaoProblema(long idDescricaoProblema) {
         this.idDescricaoProblema = idDescricaoProblema;
+    }
+
+    @Override
+    public String toString() {
+        return "Diagnostico{" +
+                "diagnosticoVeiculo='" + diagnosticoVeiculo + '\'' +
+                ", dataDiagnostico=" + dataDiagnostico +
+                ", idVeiculo=" + idVeiculo +
+                ", idDescricaoProblema=" + idDescricaoProblema +
+                '}';
     }
 }

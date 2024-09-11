@@ -1,5 +1,7 @@
+import model.DescricaoProblema;
 import model.Usuario;
 import service.DescricaoProblemaService;
+import service.DiagnosticoService;
 import service.UsuarioService;
 import service.VeiculoService;
 
@@ -9,6 +11,7 @@ public class Sistema {
     private UsuarioService usuarioService;
     private VeiculoService veiculoService;
     private DescricaoProblemaService descricaoProblemaService;
+    private DiagnosticoService diagnosticoService;
     private Scanner scanner;
     private Usuario usuario;
 
@@ -16,6 +19,7 @@ public class Sistema {
         this.usuarioService = new UsuarioService();
         this.veiculoService = new VeiculoService();
         this.descricaoProblemaService = new DescricaoProblemaService();
+        this.diagnosticoService = new DiagnosticoService();
         this.scanner = new Scanner(System.in);
     }
 
@@ -70,7 +74,8 @@ public class Sistema {
                 exibirMenu();
             }
             case 3 -> {
-                descricaoProblemaService.persistirDescricao(usuario);
+                DescricaoProblema dp = descricaoProblemaService.persistirDescricao(usuario);
+                diagnosticoService.persistirDiagnostico(dp);
                 exibirMenu();
             }
             case 4 -> {

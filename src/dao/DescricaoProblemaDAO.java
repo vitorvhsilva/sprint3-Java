@@ -23,6 +23,7 @@ public class DescricaoProblemaDAO {
             while(rs.next()) {
                 id = rs.getLong(1);
             }
+            comandoDeGeracao.close();
             rs.close();
         }catch(SQLException e) {
             throw new RuntimeException(e);
@@ -81,5 +82,22 @@ public class DescricaoProblemaDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Long buscarIdPorVeiculoEDescricao(DescricaoProblema dp) {
+        String sqlSelect = "SELECT * FROM TB_DESCRICAO_PROBLEMA WHERE descricao_problema = ? AND id_veiculo = ?";
+        Long idDescricaoProblema = null;
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setString(1, dp.getDescricaoProblema());
+            statement.setLong(2, dp.getIdVeiculo());
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                idDescricaoProblema = rs.getLong("id_descricao_problema");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return idDescricaoProblema;
     }
 }
