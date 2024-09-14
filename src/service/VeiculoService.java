@@ -133,4 +133,9 @@ public class VeiculoService {
 
         return !veiculos.isEmpty();
     }
+
+    public void fecharConexoes() {
+        usuarioDAO.fecharConexao();
+        veiculoDAO.fecharConexao();
+    }
 }

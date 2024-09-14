@@ -145,4 +145,8 @@ public class UsuarioService {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
+    public void fecharConexoes() {
+        usuarioDAO.fecharConexao();
+    }
 }

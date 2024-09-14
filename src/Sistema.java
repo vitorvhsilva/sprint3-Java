@@ -60,7 +60,8 @@ public class Sistema {
                 4 - Mostrar descrição já feitas a um veículo
                 5 - Mostrar diagnósticos já feitos a um veículo
                 6 - Fazer orçamento do veículo
-                7 - Mostrar orçamentos já feito a um veículo""");
+                7 - Mostrar orçamentos já feito a um veículo
+                8 - Encerrar o sistema""");
         int opcao = scanner.nextInt();scanner.nextLine();
 
         switch (opcao) {
@@ -99,6 +100,7 @@ public class Sistema {
                 orcamentoService.mostrarOrcamentos(usuario);
                 exibirMenu();
             }
+            case 8 -> encerrarSistema();
             default -> {
                 System.out.println("Opção inválida!");
                 encerrarOuReiniciarSistema();
@@ -112,8 +114,18 @@ public class Sistema {
         int opcao = scanner.nextInt();scanner.nextLine();
 
         if (opcao != 1) {
-            System.exit(0);
+            encerrarSistema();
         }
+    }
+
+    public void encerrarSistema() {
+        usuarioService.fecharConexoes();
+        veiculoService.fecharConexoes();
+        descricaoProblemaService.fecharConexoes();
+        diagnosticoService.fecharConexoes();
+        orcamentoService.fecharConexoes();
+
+        System.exit(0);
     }
 
     public void verificarSeOUsuarioTemVeiculos() {

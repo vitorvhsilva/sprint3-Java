@@ -47,4 +47,11 @@ public class DiagnosticoService {
 
         diagnosticos.forEach(System.out::println);
     }
+
+    public void fecharConexoes() {
+        descricaoProblemaDAO.fecharConexao();
+        diagnosticoDAO.fecharConexao();
+        usuarioDAO.fecharConexao();
+        veiculoDAO.fecharConexao();
+    }
 }

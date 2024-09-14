@@ -77,4 +77,12 @@ public class OrcamentoService {
         orcamentos.forEach(System.out::println);
         System.out.println();
     }
+
+    public void fecharConexoes() {
+        descricaoProblemaDAO.fecharConexao();
+        diagnosticoDAO.fecharConexao();
+        orcamentoDAO.fecharConexao();
+        usuarioDAO.fecharConexao();
+        veiculoDAO.fecharConexao();
+    }
 }

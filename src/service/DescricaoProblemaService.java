@@ -50,4 +50,10 @@ public class DescricaoProblemaService {
 
         descricoes.forEach(System.out::println);
     }
+
+    public void fecharConexoes() {
+        descricaoProblemaDAO.fecharConexao();
+        usuarioDAO.fecharConexao();
+        veiculoDAO.fecharConexao();
+    }
 }
