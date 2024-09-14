@@ -23,7 +23,7 @@ public class Sistema {
     }
 
     public void iniciarSistema() {
-        System.out.println(loginOuCadastro());
+        loginOuCadastro();
 
         exibirMenu();
     }
@@ -69,27 +69,33 @@ public class Sistema {
                 exibirMenu();
             }
             case 2 -> {
+                verificarSeOUsuarioTemVeiculos();
                 veiculoService.mostrarVeiculos(usuario);
                 exibirMenu();
             }
             case 3 -> {
+                verificarSeOUsuarioTemVeiculos();
                 DescricaoProblema dp = descricaoProblemaService.persistirDescricao(usuario);
                 diagnosticoService.persistirDiagnostico(dp);
                 exibirMenu();
             }
             case 4 -> {
+                verificarSeOUsuarioTemVeiculos();
                 descricaoProblemaService.mostrarDescricoesJaFeita(usuario);
                 exibirMenu();
             }
             case 5 -> {
+                verificarSeOUsuarioTemVeiculos();
                 diagnosticoService.mostrarDescricoesJaFeita(usuario);
                 exibirMenu();
             }
             case 6 -> {
+                verificarSeOUsuarioTemVeiculos();
                 orcamentoService.fazerOrcamento(usuario);
                 exibirMenu();
             }
             case 7 -> {
+                verificarSeOUsuarioTemVeiculos();
                 orcamentoService.mostrarOrcamentos(usuario);
                 exibirMenu();
             }
@@ -107,6 +113,14 @@ public class Sistema {
 
         if (opcao != 1) {
             System.exit(0);
+        }
+    }
+
+    public void verificarSeOUsuarioTemVeiculos() {
+        boolean possuiVeiculos = veiculoService.verificarSeOUsuarioTemVeiculos(usuario);
+        if (!possuiVeiculos) {
+            System.out.println("\n\nNão existe nenhum veículo cadastrado!\n");
+            exibirMenu();
         }
     }
 }

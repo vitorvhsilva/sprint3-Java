@@ -50,8 +50,6 @@ public class UsuarioDAO {
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        System.out.println("Usuário " + usuario.getNome() + " (" + usuario.getCpf() + ") persistido!");
     }
 
     public boolean usuarioExistePorCpf(String cpf) {

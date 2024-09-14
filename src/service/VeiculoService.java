@@ -123,4 +123,10 @@ public class VeiculoService {
 
         return pegarPlacaDoVeiculoEscolhido(usuario);
     }
+
+    public boolean verificarSeOUsuarioTemVeiculos(Usuario usuario) {
+        List<Veiculo> veiculos = veiculoDAO.pegarVeiculos(usuarioDAO.retornarIdPorCpf(usuario.getCpf()));
+
+        return !veiculos.isEmpty();
+    }
 }
