@@ -7,7 +7,6 @@ import dao.VeiculoDAO;
 import model.DescricaoProblema;
 import model.Diagnostico;
 import model.Usuario;
-import model.Veiculo;
 
 import java.util.List;
 import java.util.Scanner;
@@ -31,7 +30,6 @@ public class DiagnosticoService {
         Long idDescricaoProblema = descricaoProblemaDAO.buscarIdPorVeiculoEDescricao(dp);
         Diagnostico diagnostico = new Diagnostico("{Diagnóstico vindo da IA}", dp.getDataProblema(), dp.getIdVeiculo(), idDescricaoProblema);
         diagnosticoDAO.persistirDiagnostico(diagnostico);
-        System.out.println(diagnostico);
         System.out.println("Diagnóstico do veículo feito");
     }
 
