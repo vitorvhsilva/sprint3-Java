@@ -21,8 +21,6 @@ public class VeiculoService {
 
     public void persistirVeiculo(Usuario usuario) {
 
-        System.out.println(usuarioDAO.retornarIdPorCpf(usuario.getCpf()));
-
         System.out.println("Qual a marca do seu veículo?");
         String marca = scanner.nextLine();
         marca = validarString("marca", marca);
@@ -42,6 +40,12 @@ public class VeiculoService {
         System.out.println("Qual a placa do seu veículo?");
         String placa = scanner.nextLine();
         placa = validarString("placa", placa);
+
+        Veiculo veiculo = new Veiculo(placa, marca, modelo, ano, tipo, usuarioDAO.retornarIdPorCpf(usuario.getCpf()));
+        veiculoDAO.persistirVeiculo(veiculo);
+    }
+
+    public void persistirVeiculo(Usuario usuario, String marca, String modelo, Integer ano, String tipo, String placa) {
 
         Veiculo veiculo = new Veiculo(placa, marca, modelo, ano, tipo, usuarioDAO.retornarIdPorCpf(usuario.getCpf()));
         veiculoDAO.persistirVeiculo(veiculo);

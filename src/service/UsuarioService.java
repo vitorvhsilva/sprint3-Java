@@ -41,8 +41,13 @@ public class UsuarioService {
         String cpf = scanner.nextLine();
         cpf = validarDado("cpf", cpf);
 
+        if (usuarioDAO.usuarioExistePorEmail(email)) {
+            System.out.println("Usuário já existe pelo Email!");
+            return null;
+        }
+
         if (usuarioDAO.usuarioExistePorCpf(cpf)) {
-            System.out.println("Usuário já existe!");
+            System.out.println("Usuário já existe pelo CPF!");
             return null;
         }
 
@@ -53,8 +58,14 @@ public class UsuarioService {
 
     // metodo para usar nos testes unitarios
     public Usuario persistirUsuario(String nome, String email, String senha, String genero, String telefone, String cpf) {
+        if (usuarioDAO.usuarioExistePorEmail(email)) {
+            System.out.println("Usuário já existe pelo Email!");
+            return null;
+        }
+
+
         if (usuarioDAO.usuarioExistePorCpf(cpf)) {
-            System.out.println("Usuário já existe!");
+            System.out.println("Usuário já existe pelo CPF!");
             return null;
         }
 

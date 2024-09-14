@@ -11,9 +11,11 @@ import java.sql.SQLException;
 public class UsuarioDAO {
     private Connection conexao;
 
-    private Long obterProximoId() {
+    public UsuarioDAO() {
         this.conexao = new ConnectionFactory().obterConexao();
+    }
 
+    private Long obterProximoId() {
         Long id = null;
         try {
             String sql = "SELECT tb_usuario_id_usuario_seq.NEXTVAL FROM DUAL";
@@ -26,12 +28,10 @@ public class UsuarioDAO {
         }catch(SQLException e) {
             throw new RuntimeException(e);
         }
-        fecharConexao();
         return id;
     }
 
     public void persistirUsuario(Usuario usuario) {
-        this.conexao = new ConnectionFactory().obterConexao();
         String sqlInsertTbUsuario = """
                 INSERT INTO TB_USUARIO (id_usuario, nome_usuario, email_usuario, senha_usuario, genero_usuario, telefone_usuario, cpf_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)
                 """;
@@ -50,14 +50,12 @@ public class UsuarioDAO {
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        fecharConexao();
     }
 
     public boolean usuarioExistePorCpf(String cpf) {
-        this.conexao = new ConnectionFactory().obterConexao();
 
         String sqlSelect = "SELECT * FROM TB_USUARIO WHERE cpf_usuario = ?";
-        boolean existe = false;
+        boolean existe;
 
         try {
             PreparedStatement statement = conexao.prepareStatement(sqlSelect);
@@ -68,12 +66,27 @@ public class UsuarioDAO {
             return false;
         }
 
-        fecharConexao();
+        return existe;
+    }
+
+    public boolean usuarioExistePorEmail(String email) {
+
+        String sqlSelect = "SELECT * FROM TB_USUARIO WHERE email_usuario = ?";
+        boolean existe;
+
+        try {
+            PreparedStatement statement = conexao.prepareStatement(sqlSelect);
+            statement.setString(1, email);
+            ResultSet rs = statement.executeQuery();
+            existe = rs.next();
+        } catch (SQLException e) {
+            return false;
+        }
+
         return existe;
     }
 
     public Long retornarIdPorCpf(String cpf) {
-        this.conexao = new ConnectionFactory().obterConexao();
 
         String sqlSelect = "SELECT * FROM TB_USUARIO WHERE cpf_usuario = ?";
         Long id = null;
@@ -91,12 +104,10 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        fecharConexao();
         return id;
     }
 
     public Usuario buscarPorLogin(String email, String senha) {
-        this.conexao = new ConnectionFactory().obterConexao();
 
         String sqlSelect = "SELECT * FROM TB_USUARIO WHERE email_usuario = ? AND senha_usuario = ?";
         Usuario usuario = new Usuario();
@@ -124,7 +135,6 @@ public class UsuarioDAO {
             throw new RuntimeException(e);
         }
 
-        fecharConexao();
         return usuario;
     }
 

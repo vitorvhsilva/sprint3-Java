@@ -5,7 +5,6 @@ import dao.UsuarioDAO;
 import dao.VeiculoDAO;
 import model.DescricaoProblema;
 import model.Usuario;
-import model.Veiculo;
 
 import java.time.LocalDateTime;
 import java.util.List;

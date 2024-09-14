@@ -51,6 +51,17 @@ public class OrcamentoService {
 
         Diagnostico diagnostico = diagnosticos.get(opcao - 1);
 
+        // valor vai vir da IA tambem
+        Orcamento orcamento = new Orcamento(idVeiculo, diagnosticoDAO.buscarIdPorDataEIds(diagnostico), 10,
+                "{Peças vindo da IA}", LocalDateTime.now());
+
+        orcamentoDAO.persistirOrcamento(orcamento);
+        System.out.println(orcamento);
+    }
+
+    public void fazerOrcamento(Usuario usuario, Long idVeiculo, Diagnostico diagnostico) {
+
+        // valor vai vir da IA tambem
         Orcamento orcamento = new Orcamento(idVeiculo, diagnosticoDAO.buscarIdPorDataEIds(diagnostico), 10,
                 "{Peças vindo da IA}", LocalDateTime.now());
 
