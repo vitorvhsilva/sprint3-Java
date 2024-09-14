@@ -51,6 +51,18 @@ public class UsuarioService {
         return usuario;
     }
 
+    // metodo para usar nos testes unitarios
+    public Usuario persistirUsuario(String nome, String email, String senha, String genero, String telefone, String cpf) {
+        if (usuarioDAO.usuarioExistePorCpf(cpf)) {
+            System.out.println("Usuário já existe!");
+            return null;
+        }
+
+        Usuario usuario = new Usuario(nome, email, senha, genero, telefone, cpf);
+        usuarioDAO.persistirUsuario(usuario);
+        return usuario;
+    }
+
     public Usuario fazerLogin() {
         System.out.println("Qual seu email?");
         String email = scanner.nextLine();
