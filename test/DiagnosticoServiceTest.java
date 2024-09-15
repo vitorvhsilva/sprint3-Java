@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DiagnosticoServiceTest {
 
     @Test
-    void testarPersistenciaDasDescricoes() {
+    void testarPersistenciaDosDiagnosticos() {
         UsuarioService usuarioService = new UsuarioService();
         VeiculoService veiculoService = new VeiculoService();
         VeiculoDAO veiculoDAO = new VeiculoDAO();

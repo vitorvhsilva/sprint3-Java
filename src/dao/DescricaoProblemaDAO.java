@@ -78,7 +78,6 @@ public class DescricaoProblemaDAO {
     public void fecharConexao() {
         try {
             conexao.close();
-            System.out.println("DescricaoProblemaDAO fechado!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

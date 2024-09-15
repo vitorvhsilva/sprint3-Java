@@ -103,7 +103,6 @@ public class VeiculoDAO {
     public void fecharConexao() {
         try {
             conexao.close();
-            System.out.println("VeiculoDAO fechado!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
