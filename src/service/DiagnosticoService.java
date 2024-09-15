@@ -18,11 +18,11 @@ public class DiagnosticoService {
     private UsuarioDAO usuarioDAO;
     private Scanner scanner;
 
-    public DiagnosticoService() {
-        this.diagnosticoDAO = new DiagnosticoDAO();
-        this.descricaoProblemaDAO = new DescricaoProblemaDAO();
-        this.veiculoDAO = new VeiculoDAO();
-        this.usuarioDAO = new UsuarioDAO();
+    public DiagnosticoService(DiagnosticoDAO diagnosticoDAO, DescricaoProblemaDAO descricaoProblemaDAO, VeiculoDAO veiculoDAO, UsuarioDAO usuarioDAO) {
+        this.diagnosticoDAO = diagnosticoDAO;
+        this.descricaoProblemaDAO = descricaoProblemaDAO;
+        this.veiculoDAO = veiculoDAO;
+        this.usuarioDAO = usuarioDAO;
         this.scanner = new Scanner(System.in);
     }
 
@@ -35,7 +35,10 @@ public class DiagnosticoService {
 
 
     public void mostrarDescricoesJaFeita(Usuario usuario) {
-        String placa = new VeiculoService().pegarPlacaDoVeiculoEscolhido(usuario);
+        VeiculoService veiculoService = new VeiculoService(veiculoDAO, usuarioDAO);
+        String placa = veiculoService.pegarPlacaDoVeiculoEscolhido(usuario);
+        veiculoService.fecharConexoes();
+
         Long idVeiculo = veiculoDAO.pegarIdPelaPlaca(placa);
 
         List<Diagnostico> diagnosticos = diagnosticoDAO.pegarDiagnosticos(idVeiculo);
