@@ -1,4 +1,5 @@
 import dao.DescricaoProblemaDAO;
+import dao.UsuarioDAO;
 import dao.VeiculoDAO;
 import model.DescricaoProblema;
 import model.Usuario;
@@ -15,10 +16,12 @@ public class DescricaoServiceProblemaTest {
 
     @Test
     void testarPersistenciaDasDescricoes() {
-        UsuarioService usuarioService = new UsuarioService();
-        VeiculoService veiculoService = new VeiculoService();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
         VeiculoDAO veiculoDAO = new VeiculoDAO();
         DescricaoProblemaDAO descricaoProblemaDAO = new DescricaoProblemaDAO();
+
+        UsuarioService usuarioService = new UsuarioService(usuarioDAO);
+        VeiculoService veiculoService = new VeiculoService(veiculoDAO, usuarioDAO);
 
         //gerando cpf aleatorio
         StringBuilder cpfString = new StringBuilder();

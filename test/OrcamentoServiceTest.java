@@ -1,8 +1,5 @@
 
-import dao.DescricaoProblemaDAO;
-import dao.DiagnosticoDAO;
-import dao.OrcamentoDAO;
-import dao.VeiculoDAO;
+import dao.*;
 import model.DescricaoProblema;
 import model.Diagnostico;
 import model.Orcamento;
@@ -21,14 +18,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class OrcamentoServiceTest {
     @Test
     void testarPersistenciaDasDescricoes() {
-        UsuarioService usuarioService = new UsuarioService();
-        VeiculoService veiculoService = new VeiculoService();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
         VeiculoDAO veiculoDAO = new VeiculoDAO();
         DescricaoProblemaDAO descricaoProblemaDAO = new DescricaoProblemaDAO();
-        DiagnosticoService diagnosticoService = new DiagnosticoService();
         DiagnosticoDAO diagnosticoDAO = new DiagnosticoDAO();
         OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-        OrcamentoService orcamentoService = new OrcamentoService();
+
+        UsuarioService usuarioService = new UsuarioService(usuarioDAO);
+        VeiculoService veiculoService = new VeiculoService(veiculoDAO, usuarioDAO);
+        DiagnosticoService diagnosticoService = new DiagnosticoService(diagnosticoDAO, descricaoProblemaDAO, veiculoDAO, usuarioDAO);
+        OrcamentoService orcamentoService = new OrcamentoService(diagnosticoDAO, descricaoProblemaDAO, veiculoDAO, usuarioDAO, orcamentoDAO);
 
         //gerando cpf aleatorio
         StringBuilder cpfString = new StringBuilder();

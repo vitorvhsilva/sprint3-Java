@@ -1,3 +1,4 @@
+import dao.UsuarioDAO;
 import model.Usuario;
 import org.junit.jupiter.api.Test;
 import service.UsuarioService;
@@ -30,7 +31,8 @@ public class UsuarioServiceTest {
         }
         String email2 = letterString2 + "@email.com";
 
-        UsuarioService usuarioService = new UsuarioService();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        UsuarioService usuarioService = new UsuarioService(usuarioDAO);
         Usuario usuarioUm = usuarioService.persistirUsuario("Vitor", email1, "12345678", "M", "11987492156", cpf);
         Usuario usuarioDois = usuarioService.persistirUsuario("Vitor", email2, "12345678", "M", "11987492156", cpf);
 
@@ -61,7 +63,8 @@ public class UsuarioServiceTest {
         }
         String email = letterString + "@email.com";
 
-        UsuarioService usuarioService = new UsuarioService();
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        UsuarioService usuarioService = new UsuarioService(usuarioDAO);
         Usuario usuarioUm = usuarioService.persistirUsuario("Vitor", email, "12345678", "M", "11987492156", cpf1);
         Usuario usuarioDois = usuarioService.persistirUsuario("Vitor", email, "12345678", "M", "11987492156", cpf2);
 

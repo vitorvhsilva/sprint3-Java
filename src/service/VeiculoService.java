@@ -13,11 +13,13 @@ public class VeiculoService {
     private UsuarioDAO usuarioDAO;
     private Scanner scanner;
 
-    public VeiculoService() {
-        this.veiculoDAO = new VeiculoDAO();
-        this.usuarioDAO = new UsuarioDAO();
+    public VeiculoService(VeiculoDAO veiculoDAO, UsuarioDAO usuarioDAO) {
+        this.veiculoDAO = veiculoDAO;
+        this.usuarioDAO = usuarioDAO;
         this.scanner = new Scanner(System.in);
     }
+
+
 
     public void persistirVeiculo(Usuario usuario) {
 

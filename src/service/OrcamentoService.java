@@ -18,17 +18,20 @@ public class OrcamentoService {
     private OrcamentoDAO orcamentoDAO;
     private Scanner scanner;
 
-    public OrcamentoService() {
-        this.diagnosticoDAO = new DiagnosticoDAO();
-        this.descricaoProblemaDAO = new DescricaoProblemaDAO();
-        this.veiculoDAO = new VeiculoDAO();
-        this.usuarioDAO = new UsuarioDAO();
-        this.orcamentoDAO = new OrcamentoDAO();
+    public OrcamentoService(DiagnosticoDAO diagnosticoDAO, DescricaoProblemaDAO descricaoProblemaDAO, VeiculoDAO veiculoDAO, UsuarioDAO usuarioDAO, OrcamentoDAO orcamentoDAO) {
+        this.diagnosticoDAO = diagnosticoDAO;
+        this.descricaoProblemaDAO = descricaoProblemaDAO;
+        this.veiculoDAO = veiculoDAO;
+        this.usuarioDAO = usuarioDAO;
+        this.orcamentoDAO = orcamentoDAO;
         this.scanner = new Scanner(System.in);
     }
 
     public void fazerOrcamento(Usuario usuario) {
-        String placa = new VeiculoService().pegarPlacaDoVeiculoEscolhido(usuario);
+        VeiculoService veiculoService = new VeiculoService(veiculoDAO, usuarioDAO);
+        String placa = veiculoService.pegarPlacaDoVeiculoEscolhido(usuario);
+        veiculoService.fecharConexoes();
+
         Long idVeiculo = veiculoDAO.pegarIdPelaPlaca(placa);
 
         List<Diagnostico> diagnosticos = diagnosticoDAO.pegarDiagnosticos(idVeiculo);
@@ -70,7 +73,10 @@ public class OrcamentoService {
     }
 
     public void mostrarOrcamentos(Usuario usuario) {
-        String placa = new VeiculoService().pegarPlacaDoVeiculoEscolhido(usuario);
+        VeiculoService veiculoService = new VeiculoService(veiculoDAO, usuarioDAO);
+        String placa = veiculoService.pegarPlacaDoVeiculoEscolhido(usuario);
+        veiculoService.fecharConexoes();
+
         Long idVeiculo = veiculoDAO.pegarIdPelaPlaca(placa);
 
         List<Orcamento> orcamentos = orcamentoDAO.pegarOrcamentos(idVeiculo);
