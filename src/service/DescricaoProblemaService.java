@@ -5,7 +5,6 @@ import dao.UsuarioDAO;
 import dao.VeiculoDAO;
 import model.DescricaoProblema;
 import model.Usuario;
-import model.Veiculo;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,18 +16,15 @@ public class DescricaoProblemaService {
     private UsuarioDAO usuarioDAO;
     private Scanner scanner;
 
-    public DescricaoProblemaService(DescricaoProblemaDAO descricaoProblemaDAO, VeiculoDAO veiculoDAO, UsuarioDAO usuarioDAO) {
-        this.descricaoProblemaDAO = descricaoProblemaDAO;
-        this.veiculoDAO = veiculoDAO;
-        this.usuarioDAO = usuarioDAO;
+    public DescricaoProblemaService() {
+        this.descricaoProblemaDAO = new DescricaoProblemaDAO();
+        this.veiculoDAO = new VeiculoDAO();
+        this.usuarioDAO = new UsuarioDAO();
         this.scanner = new Scanner(System.in);
     }
 
     public DescricaoProblema persistirDescricao(Usuario usuario) {
-        VeiculoService veiculoService = new VeiculoService(veiculoDAO, usuarioDAO);
-        String placa = veiculoService.pegarPlacaDoVeiculoEscolhido(usuario);
-        veiculoService.fecharConexoes();
-
+        String placa = new VeiculoService().pegarPlacaDoVeiculoEscolhido(usuario);
         Long idVeiculo = veiculoDAO.pegarIdPelaPlaca(placa);
 
         System.out.println("O que aconteceu com o seu veículo?");
@@ -42,10 +38,7 @@ public class DescricaoProblemaService {
     }
 
     public void mostrarDescricoesJaFeita(Usuario usuario) {
-        VeiculoService veiculoService = new VeiculoService(veiculoDAO, usuarioDAO);
-        String placa = veiculoService.pegarPlacaDoVeiculoEscolhido(usuario);
-        veiculoService.fecharConexoes();
-
+        String placa = new VeiculoService().pegarPlacaDoVeiculoEscolhido(usuario);
         Long idVeiculo = veiculoDAO.pegarIdPelaPlaca(placa);
 
         List<DescricaoProblema> descricoes = descricaoProblemaDAO.pegarDescricoes(idVeiculo);

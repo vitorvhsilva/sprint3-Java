@@ -11,8 +11,8 @@ public class UsuarioService {
     private UsuarioDAO usuarioDAO;
     private Scanner scanner;
 
-    public UsuarioService(UsuarioDAO usuarioDAO) {
-        this.usuarioDAO = usuarioDAO;
+    public UsuarioService() {
+        this.usuarioDAO = new UsuarioDAO();
         this.scanner = new Scanner(System.in);
     }
 
