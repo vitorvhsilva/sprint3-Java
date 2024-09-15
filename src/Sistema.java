@@ -1,4 +1,3 @@
-import dao.*;
 import model.DescricaoProblema;
 import model.Usuario;
 import service.*;
@@ -15,17 +14,11 @@ public class Sistema {
     private Usuario usuario;
 
     public Sistema() {
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        VeiculoDAO veiculoDAO = new VeiculoDAO();
-        DescricaoProblemaDAO descricaoProblemaDAO = new DescricaoProblemaDAO();
-        DiagnosticoDAO diagnosticoDAO = new DiagnosticoDAO();
-        OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-
-        this.usuarioService = new UsuarioService(usuarioDAO);
-        this.veiculoService = new VeiculoService(veiculoDAO, usuarioDAO);
-        this.descricaoProblemaService = new DescricaoProblemaService(descricaoProblemaDAO, veiculoDAO, usuarioDAO);
-        this.diagnosticoService = new DiagnosticoService(diagnosticoDAO, descricaoProblemaDAO, veiculoDAO, usuarioDAO);
-        this.orcamentoService = new OrcamentoService(diagnosticoDAO, descricaoProblemaDAO, veiculoDAO, usuarioDAO, orcamentoDAO);
+        this.usuarioService = new UsuarioService();
+        this.veiculoService = new VeiculoService();
+        this.descricaoProblemaService = new DescricaoProblemaService();
+        this.diagnosticoService = new DiagnosticoService();
+        this.orcamentoService = new OrcamentoService();
         this.scanner = new Scanner(System.in);
     }
 

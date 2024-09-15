@@ -15,10 +15,10 @@ public class VeiculoServiceTest {
     @Test
     void testarPersistenciaDeVeiculos() {
 
+        UsuarioService usuarioService = new UsuarioService();
+        VeiculoService veiculoService = new VeiculoService();
         VeiculoDAO veiculoDAO = new VeiculoDAO();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        UsuarioService usuarioService = new UsuarioService(usuarioDAO);
-        VeiculoService veiculoService = new VeiculoService(veiculoDAO, usuarioDAO);
 
         //gerando cpf aleatorio
         StringBuilder cpfString = new StringBuilder();
